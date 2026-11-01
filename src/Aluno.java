@@ -1,60 +1,35 @@
-public class Aluno {
-    private String nome;
+public class Aluno extends Usuario {
+
     private String matricula;
     private String curso;
 
-    // Método para validar os campos
-    private void validarCampo(String valor, String mensagem) {
-        if (valor == null || valor.isBlank()) {
-            throw new IllegalArgumentException(mensagem);
-        }
-    }
-
     // Construtor
-    public Aluno(String nome, String matricula, String curso) {
-        validarCampo(nome, "O nome do aluno não pode ser vazio.");
+    public Aluno(String nome, String login, String senha, String matricula, String curso) {
+        super(nome, login, senha);
         validarCampo(matricula, "A matrícula não pode ser vazia.");
         validarCampo(curso, "O curso não pode ser vazio.");
 
-        this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
     }
 
-    // Getters e Setters
-    public String getNome() {
-        return nome;
+    // Método para exibir informações
+    @Override
+    public void exibirInformacoes() {
+        System.out.println("\n============== ALUNO ================");
+        System.out.println("Nome: " + getNome());
+        System.out.println("Matrícula: " + matricula);
+        System.out.println("Curso: " + curso);
+        System.out.println("========================================");
     }
 
-    public void setNome(String nome) {
-        validarCampo(nome, "O nome do aluno não pode ser vazio.");
-        this.nome = nome;
-    }
+    //Getters
 
     public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
-        validarCampo(matricula, "A matrícula não pode ser vazia.");
-        this.matricula = matricula;
-    }
-
     public String getCurso() {
         return curso;
-    }
-
-    public void setCurso(String curso) {
-        validarCampo(curso, "O curso não pode ser vazio.");
-        this.curso = curso;
-    }
-
-    // Método para exibir informações
-    public void exibirInformacoes() {
-        System.out.println("\n============== ALUNO ================");
-        System.out.println("Nome: " + nome);
-        System.out.println("Matrícula: " + matricula);
-        System.out.println("Curso: " + curso);
-        System.out.println("========================================");
     }
 }

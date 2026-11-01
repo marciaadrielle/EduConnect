@@ -58,12 +58,12 @@ public class Curso {
         this.cargaHoraria = cargaHoraria;
     }
 
-    // Método para exibir os dados do curso
-    public void exibirInformacoes() {
+    // Método para detalhar o curso
+    public void detalharCurso() {
         System.out.println("\n============== CURSO ================");
         System.out.println("Curso: " + nome);
         System.out.println("Código: " + codigo);
-        System.out.println("Carga horária: " + cargaHoraria);
+        System.out.println("Carga horária: " + cargaHoraria + " horas");
         System.out.println("========================================");
     }
 }

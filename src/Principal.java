@@ -24,22 +24,38 @@ public class Principal {
                 "Programação Orientada a Objetos",
                 "PF0056");
 
-        // Instanciando curso
+        /*/ Instanciando curso
         Curso curso = new Curso(
                 "Análise e Desenvolvimento de Sistemas",
                 "ADS001",
                 2200);
+*/
+        //Instanciando um curso presencial
+        CursoPresencial cursoPresencial = new CursoPresencial(
+                "Redes de Computadores",
+                "RD001",
+                1900,
+                "Sala 2"
+
+        );
+
+        //Instanciando um curso Ead
+        CursoEAD cursoEAD = new CursoEAD(
+                "Análise e Desenvolvimento de Sistemas",
+                "ADS001",
+                2200,
+                "Studeo"
+        );
 
         //Instanciando turma
-        Turma turma1 = new Turma("TURMA001",professor,curso);
+        Turma turma1 = new Turma("TURMA001",professor,cursoEAD);
 
         //Adicionando alunos na turma
         turma1.adicionarAluno(aluno);
         turma1.adicionarAluno(aluno1);
         turma1.adicionarAluno(aluno2);
 
-
-
+        //Atribuindo as avaliações
         Avaliacao avaliacao = new Avaliacao("Prova de POO", aluno);
         avaliacao.atribuirNota(8.5);
 
@@ -55,6 +71,11 @@ public class Principal {
         turma1.adicionarAvaliacao(avaliacao2);
 
         turma1.mostrarResumo();
+
+        // Exibindo os detalhes dos cursos
+        cursoPresencial.detalharCurso();
+
+        cursoEAD.detalharCurso();
 
     }
 }

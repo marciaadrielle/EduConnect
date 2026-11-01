@@ -38,15 +38,23 @@ public class Principal {
         turma1.adicionarAluno(aluno1);
         turma1.adicionarAluno(aluno2);
 
-        //Exibindo o resumo da turma
+
+
+        Avaliacao avaliacao = new Avaliacao("Prova de POO", aluno);
+        avaliacao.atribuirNota(8.5);
+
+        Avaliacao avaliacao1 = new Avaliacao("Prova Substitutiva de Banco de dados", aluno1);
+        avaliacao1.atribuirNota(6);
+
+        Avaliacao avaliacao2 = new Avaliacao("Prova de POO", aluno2);
+        avaliacao2.atribuirNota(10);
+
+        // Adicionando avaliações à turma
+        turma1.adicionarAvaliacao(avaliacao);
+        turma1.adicionarAvaliacao(avaliacao1);
+        turma1.adicionarAvaliacao(avaliacao2);
+
         turma1.mostrarResumo();
-
-        //Removendo aluno da turma
-        turma1.removerAluno(aluno2);
-
-        //Exibindo o resumo da turma após a remoção
-        turma1.mostrarResumo();
-
 
     }
 }

@@ -4,6 +4,7 @@ public class Avaliacao {
     private double nota;
     private String descricao;
 
+
     // Construtor
     public Avaliacao(String descricao, Aluno aluno) {
 
@@ -19,7 +20,7 @@ public class Avaliacao {
         this.descricao = descricao;
     }
 
-    // Atribui e valida a nota
+    // Método para atribuir e validar a nota
     public void atribuirNota(double valor) {
         if (valor < 0 || valor > 10) {
             throw new IllegalArgumentException("A nota deve estar entre 0 e 10.");

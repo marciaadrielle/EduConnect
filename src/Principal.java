@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
@@ -90,25 +93,68 @@ public class Principal {
         cursoPresencial.detalharCurso();
         cursoEAD.detalharCurso();
 
-        // Testando autenticação
-        System.out.println("\n============= AUTENTICAÇÃO ==============");
-        if (aluno.autenticar("marcia", "234")) {
-            System.out.println("Aluno: Usuário logado com sucesso!");
-        } else {
-            System.out.println("Aluno: Usuário ou senha incorretos.");
-        }
+        // Criando uma lista polimórfica que aceita qualquer coisa que gere relatório
+        List<Relatorio> listaDeRelatorios = new ArrayList<>();
+        listaDeRelatorios.add(aluno);
+        listaDeRelatorios.add(aluno1);
+        listaDeRelatorios.add(aluno2);
+        listaDeRelatorios.add(professor);
+        listaDeRelatorios.add(cursoPresencial);
+        listaDeRelatorios.add(cursoEAD);
 
-        if (professor.autenticar("edmar", "456")) {
-            System.out.println("Professor: Usuário logado com sucesso!");
-        } else {
-            System.out.println("Professor: Usuário ou senha incorretos.");
-        }
+        Scanner scanner = new Scanner(System.in);
+        int opcao = -1;
 
-        if (administrador.autenticar("admin", "789")) {
-            System.out.println("Administrador: Usuário logado com sucesso!");
-        } else {
-            System.out.println("Administrador: Usuário ou senha incorretos.");
+        // Laço de repetição para o Menu
+        while (opcao != 0) {
+            System.out.println("\n========== MENU DE RELATÓRIOS ==========");
+            System.out.println("1 - Gerar Relatório geral");
+            System.out.println("2 - Gerar Relatório de alunos");
+            System.out.println("3 - Gerar Relatório de professores");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha uma opção: ");
+
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("\nGerando Relatório Geral do Sistema...");
+                    System.out.println("\n========== RELATÓRIOS GERAL ==========");
+                    for (Relatorio item : listaDeRelatorios) {
+                        item.gerarRelatorio();
+                    }
+                    System.out.println("========== FIM DO RELATÓRIO ==========");
+                    break;
+                case 2:
+                    System.out.println("\nGerando Relatório de Alunos...");
+                    System.out.println("\n========== RELATÓRIO DE ALUNOS ==========");
+                    for (Relatorio item : listaDeRelatorios) {
+                        if (item instanceof Aluno) { // Filtra apenas objetos do tipo Aluno
+                            item.gerarRelatorio();
+                        }
+                    }
+                    System.out.println("========== FIM DO RELATÓRIO ==========");
+                    break;
+                case 3:
+                    System.out.println("\nGerando Relatório de Professores...");
+                    System.out.println("\"\n========== RELATÓRIOS DE PROFESSORES ==========");
+                    for (Relatorio item : listaDeRelatorios) {
+                        if (item instanceof Professor) { // Filtra apenas objetos do tipo Professor
+                            item.gerarRelatorio();
+                        }
+                    }
+                    System.out.println("========== FIM DO RELATÓRIO ==========");
+                    break;
+                case 0:
+                    System.out.println("Saindo do sistema de relatórios.");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
         }
+        scanner.close();
 
     }
+
+
 }

@@ -1,4 +1,4 @@
-public class Professor extends Usuario {
+public class Professor extends Usuario implements Relatorio {
 
     private String especialidade;
     private String registro;
@@ -13,6 +13,15 @@ public class Professor extends Usuario {
         this.registro = registro;
     }
 
+    //Getters
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public String getRegistro() {
+        return registro;
+    }
+
     // Método para exibir os dados do professor
     @Override
     public void exibirInformacoes() {
@@ -23,13 +32,13 @@ public class Professor extends Usuario {
         System.out.println("=======================================");
     }
 
-
-    //Getters
-    public String getEspecialidade() {
-        return especialidade;
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Professor: " + getNome());
+        System.out.println("Especialidade: " + especialidade);
+        System.out.println("Registro: " + registro);
+        System.out.println("------------------------------------------");
     }
 
-    public String getRegistro() {
-        return registro;
-    }
+
 }

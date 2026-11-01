@@ -1,5 +1,4 @@
-
-public class Curso {
+public class Curso implements Relatorio{
     private String nome;
     private String codigo;
     private int cargaHoraria;
@@ -65,5 +64,11 @@ public class Curso {
         System.out.println("Código: " + codigo);
         System.out.println("Carga horária: " + cargaHoraria + " horas");
         System.out.println("========================================");
+    }
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Curso: " + nome);
+        System.out.println("Código: " + codigo);
+        System.out.println("------------------------------------------");
     }
 }

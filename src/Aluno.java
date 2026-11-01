@@ -1,4 +1,4 @@
-public class Aluno extends Usuario {
+public class Aluno extends Usuario implements Relatorio {
 
     private String matricula;
     private String curso;
@@ -13,6 +13,16 @@ public class Aluno extends Usuario {
         this.curso = curso;
     }
 
+    //Getters
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
     // Método para exibir informações
     @Override
     public void exibirInformacoes() {
@@ -23,13 +33,14 @@ public class Aluno extends Usuario {
         System.out.println("========================================");
     }
 
-    //Getters
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Aluno: " + getNome());
+        System.out.println("Matrícula: " + matricula);
+        System.out.println("Curso: " + curso);
+        System.out.println("------------------------------------------");
 
-    public String getMatricula() {
-        return matricula;
     }
 
-    public String getCurso() {
-        return curso;
-    }
+
 }

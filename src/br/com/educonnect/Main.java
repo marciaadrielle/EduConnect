@@ -3,6 +3,7 @@ package br.com.educonnect;
 import br.com.educonnect.model.Aluno;
 import br.com.educonnect.model.Curso;
 import br.com.educonnect.model.Professor;
+import br.com.educonnect.model.Turma;
 
 public class Main {
     public static void main(String[] args){
@@ -27,6 +28,10 @@ public class Main {
         System.out.println("Especialidade: " + professor.getEspecialidade());
         System.out.println("Registro: " + professor.getRegistro());
         System.out.println("=======================================");
+
+        Turma turma = new Turma("TURMA001", professor, curso);
+        turma.adicionarAluno(aluno);
+        turma.exibirResumo();
 
     }
 

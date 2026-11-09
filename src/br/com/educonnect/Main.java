@@ -7,7 +7,7 @@ import br.com.educonnect.model.Turma;
 
 public class Main {
     public static void main(String[] args){
-
+        //Instancia um curso
         Curso curso = new Curso("Análise e Desenvolvimento de Sistemas", "ADS01", 2000);
         System.out.println("\n================ CURSO ==============");
         System.out.println("Nome: " + curso.getNome());
@@ -15,6 +15,7 @@ public class Main {
         System.out.println("Carga Horária: " + curso.getCargaHoraria());
         System.out.println("=====================================");
 
+        //Instancia um aluno
         Aluno aluno = new Aluno("Márcia Adrielle","000000-01",curso);
         System.out.println("\n================ ALUNO ===============");
         System.out.println("Nome: " + aluno.getNome());
@@ -22,6 +23,7 @@ public class Main {
         System.out.println("Curso: " + aluno.getCurso().getNome());
         System.out.println("======================================");
 
+        //Instancia um professor
         Professor professor = new Professor("Edmar Senne", "Java", "111113-66");
         System.out.println("\n============== PROFESSOR =============");
         System.out.println("Nome: " + professor.getNome());
@@ -29,8 +31,27 @@ public class Main {
         System.out.println("Registro: " + professor.getRegistro());
         System.out.println("=======================================");
 
+        //Instancia uma turma
         Turma turma = new Turma("TURMA001", professor, curso);
+
+        //Instancia novos alunos
+        Aluno aluno2 = new Aluno("Christopher Brandon", "000000-02", curso);
+        Aluno aluno3 = new Aluno("Elizabeth Bennet", "000000-03", curso);
+        Aluno aluno4 = new Aluno("Jane Eyre", "000000-04", curso);
+
+        //Adiciona os alunos na turma
         turma.adicionarAluno(aluno);
+        turma.adicionarAluno(aluno2);
+        turma.adicionarAluno(aluno3);
+        turma.adicionarAluno(aluno4);
+
+        //Mostra o resumo da turma
+        turma.exibirResumo();
+
+        //Remove um aluno da turma
+        turma.removerAluno("000000-03");
+
+        //Mostra o resumo
         turma.exibirResumo();
 
     }

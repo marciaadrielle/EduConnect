@@ -57,8 +57,8 @@ public class Turma {
 
     //Método para mostrar o resumo da turma
     public void exibirResumo(){
-        System.out.println("========================================");
-        System.out.println("Turma: " + codigo);
+        System.out.println("\n================= TURMA =================");
+        System.out.println("Código: " + codigo);
         System.out.println("Curso: " + curso.getNome());
         System.out.println("Professor: " + professor.getNome());
         System.out.println("Quantidade de Alunos Matriculados: " +

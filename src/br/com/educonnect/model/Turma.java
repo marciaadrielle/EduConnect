@@ -67,6 +67,25 @@ public class Turma {
     }
 
 
+    public void exibirAvaliacoes() {
+        System.out.println("\n===== AVALIAÇÕES DA TURMA " + codigo + " =====");
+
+        // Percorre os alunos matriculados na turma
+        for (Aluno aluno : listaAlunos) {
+
+            System.out.println("Aluno: " + aluno.getNome());
+            System.out.println("Matrícula: " + aluno.getMatricula());
+            for (Avaliacao avaliacao : aluno.getAvaliacoes()) {
+                System.out.println("Avaliação: " + avaliacao.getDescricao());
+                System.out.println("Nota: " + avaliacao.getNota());
+            }
+
+            System.out.println("==========================================");
+        }
+    }
+
+
+
 
 
 

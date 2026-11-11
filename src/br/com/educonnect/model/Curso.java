@@ -38,4 +38,15 @@ public class Curso {
     public int getCargaHoraria() {
         return cargaHoraria;
     }
+
+    // Método para detalhar o curso
+    public void detalharCurso() {
+        System.out.println("\n============== CURSO ================");
+        System.out.println("Curso: " + nome);
+        System.out.println("Código: " + codigo);
+        System.out.println("Carga horária: " + cargaHoraria + " horas");
+        System.out.println("========================================");
+    }
 }
+
+

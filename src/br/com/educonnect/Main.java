@@ -6,7 +6,6 @@ import br.com.educonnect.model.*;
 public class Main {
 
     public static void main(String[] args) {
-
         // Instancia um curso
         Curso curso = new Curso(
                 "Análise e Desenvolvimento de Sistemas",
@@ -14,11 +13,23 @@ public class Main {
                 2000
         );
 
-        System.out.println("\n================ CURSO ==============");
-        System.out.println("Nome: " + curso.getNome());
-        System.out.println("Código: " + curso.getCodigo());
-        System.out.println("Carga Horária: " + curso.getCargaHoraria());
-        System.out.println("=====================================");
+        // Instancia um curso presencial
+        Curso cursoPresencial = new CursoPresencial(
+                "Banco de Dados",
+                "BD001",
+                2000,
+                "SL12"
+        );
+
+        //Instancia um curso EAD
+        Curso cursoEAD = new CursoEAD(
+                "Desenvolvimento Back-end com Java",
+                "JAVA01",
+                220,
+                "Studeo"
+        );
+
+
 
         // Instancia um aluno
         Aluno aluno = new Aluno("Márcia Adrielle", "000000-01", curso);
@@ -43,7 +54,7 @@ public class Main {
         System.out.println("=======================================");
 
         // Instancia uma turma
-        Turma turma = new Turma("TURMA001", professor, curso);
+        Turma turma = new Turma("TURMA001", professor, cursoEAD);
 
         // Instancia novos alunos
         Aluno aluno2 = new Aluno("Christopher Brandon", "000000-02", curso);
@@ -79,5 +90,11 @@ public class Main {
 
         // Exibe as avaliações de todos os alunos da turma
         turma.exibirAvaliacoes();
+
+        // Exibe o detalhamento dos cursos
+        curso.detalharCurso();
+        cursoPresencial.detalharCurso();
+        cursoEAD.detalharCurso();
+
     }
 }

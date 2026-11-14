@@ -6,33 +6,29 @@ import br.com.educonnect.model.*;
 public class Main {
 
     public static void main(String[] args) {
-        // Instancia um curso
-        Curso curso = new Curso(
-                "Análise e Desenvolvimento de Sistemas",
-                "ADS01",
-                2000
-        );
 
         // Instancia um curso presencial
         Curso cursoPresencial = new CursoPresencial(
                 "Banco de Dados",
-                "BD001",
-                2000,
+                "BD01",
+                200,
                 "SL12"
         );
 
         //Instancia um curso EAD
         Curso cursoEAD = new CursoEAD(
-                "Desenvolvimento Back-end com Java",
-                "JAVA01",
-                220,
+                "Análise e Desenvolvimento de Sistemas",
+                "ADS01",
+                2200,
                 "Studeo"
         );
 
-
-
         // Instancia um aluno
-        Aluno aluno = new Aluno("Márcia Adrielle", "000000-01", curso);
+        Aluno aluno = new Aluno("Márcia Adrielle",
+                "marciaadrielle",
+                "Naruto123",
+                "000000-01",
+                cursoEAD);
 
         System.out.println("\n================ ALUNO ===============");
         System.out.println("Nome: " + aluno.getNome());
@@ -43,6 +39,8 @@ public class Main {
         // Instancia um professor
         Professor professor = new Professor(
                 "Edmar Senne",
+                "Senne",
+                "Ed1266356",
                 "Java",
                 "111113-66"
         );
@@ -53,14 +51,40 @@ public class Main {
         System.out.println("Registro: " + professor.getRegistro());
         System.out.println("=======================================");
 
+        // Instancia um professor
+        Administrador administrador = new Administrador(
+                "Adrielle",
+                "admin",
+                "Admin@123"
+        );
+
         // Instancia uma turma
         Turma turma = new Turma("TURMA001", professor, cursoEAD);
 
         // Instancia novos alunos
-        Aluno aluno2 = new Aluno("Christopher Brandon", "000000-02", curso);
-        Aluno aluno3 = new Aluno("Elizabeth Bennet", "000000-03", curso);
-        Aluno aluno4 = new Aluno("Jane Eyre", "000000-04", curso);
+        Aluno aluno2 = new Aluno(
+                "Christopher Brandon",
+                "christopher",
+                "Chris@123",
+                "000000-02",
+                cursoEAD
+        );
 
+        Aluno aluno3 = new Aluno(
+                "Elizabeth Bennet",
+                "elizabeth",
+                "Liz@12345",
+                "000000-03",
+                cursoEAD
+        );
+
+        Aluno aluno4 = new Aluno(
+                "Jane Eyre",
+                "janeeyre",
+                "Jane@123",
+                "000000-04",
+                cursoEAD
+        );
         // Adiciona os alunos à turma
         turma.adicionarAluno(aluno);
         turma.adicionarAluno(aluno2);
@@ -92,7 +116,6 @@ public class Main {
         turma.exibirAvaliacoes();
 
         // Exibe o detalhamento dos cursos
-        curso.detalharCurso();
         cursoPresencial.detalharCurso();
         cursoEAD.detalharCurso();
 

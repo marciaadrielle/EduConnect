@@ -3,32 +3,28 @@ package br.com.educonnect.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aluno {
-    private String nome;
+public class Aluno extends Usuario {
     private String matricula;
     private Curso curso;
     private List<Avaliacao> avaliacoes;
 
-    public Aluno(String nome, String matricula, Curso curso) {
+    public Aluno(String nome, String login, String senha, String matricula, Curso curso) {
+        super(nome, login, senha);
         //Validações
-        if (nome == null || nome.isBlank()){
-            throw new IllegalArgumentException("O nome do aluno não pode estar vazio.");
+        if (matricula == null || matricula.isBlank()) {
+            throw new IllegalArgumentException("A matricula do aluno não pode estar vazia.");
         }
-
-        if (matricula == null || matricula.isBlank()){
-            throw  new IllegalArgumentException("A matricula do aluno não pode estar vazia.");
-        }
-        if (curso ==null){
+        if (curso == null) {
             throw new IllegalArgumentException("O aluno precisa estar associado a um curso.");
         }
-        this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
         this.avaliacoes = new ArrayList<>();
     }
+
     //Método para adicionar a avaliação ao aluno
-    public void adicionarAvaliacao(Avaliacao avaliacao){
-        if(avaliacao == null){
+    public void adicionarAvaliacao(Avaliacao avaliacao) {
+        if (avaliacao == null) {
             throw new IllegalArgumentException("A avaliação não pode ser nula");
         }
 
@@ -40,13 +36,7 @@ public class Aluno {
         avaliacoes.add(avaliacao);
     }
 
-
     //Getters
-
-    public String getNome() {
-        return nome;
-    }
-
     public String getMatricula() {
         return matricula;
     }

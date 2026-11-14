@@ -1,16 +1,12 @@
 package br.com.educonnect.model;
 
-public class Professor {
-    private String nome;
+public class Professor extends Usuario {
     private String especialidade;
     private String registro;
 
-    public Professor(String nome, String especialidade, String registro) {
+    public Professor(String nome, String login, String senha, String especialidade, String registro) {
+        super(nome, login, senha);
         //Validações
-        if (nome == null || nome.isBlank()) {
-            throw new IllegalArgumentException("O nome do professor não pode estar vazio.");
-        }
-
         if (especialidade == null || especialidade.isBlank()) {
             throw new IllegalArgumentException("A especialidade do professor não pode estar vazia.");
         }
@@ -18,13 +14,8 @@ public class Professor {
         if (registro == null || registro.isBlank()) {
             throw new IllegalArgumentException("O registro do professor não pode estar vazio.");
         }
-        this.nome = nome;
         this.especialidade = especialidade;
         this.registro = registro;
-    }
-
-    public String getNome() {
-        return nome;
     }
 
     public String getEspecialidade() {
@@ -34,4 +25,5 @@ public class Professor {
     public String getRegistro() {
         return registro;
     }
+
 }

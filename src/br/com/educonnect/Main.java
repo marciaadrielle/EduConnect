@@ -3,8 +3,7 @@ package br.com.educonnect;
 import br.com.educonnect.model.*;
 import br.com.educonnect.repository.*;
 import br.com.educonnect.service.*;
-
-import java.util.Scanner;
+import br.com.educonnect.ui.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,6 +13,10 @@ public class Main {
         ProfessorService professorService = new ProfessorService(professorRepository);
         CursoRepository cursoRepository = new CursoRepository();
         CursoService cursoService = new CursoService(cursoRepository);
+        MenuRelatorios menuRelatorios = new MenuRelatorios(alunoService,professorService,
+                cursoService);
+
+
 
         //Instancia um administrador
         Administrador administrador = new Administrador(
@@ -134,90 +137,9 @@ public class Main {
         cursoPresencial.detalharCurso();
         cursoEAD.detalharCurso();
 
-        System.out.println("\n===== TESTES DE AUTENTICAÇÃO =====");
-
-        // Autenticação do aluno
-        if (aluno.autenticar("marcia.adrielle", "Naruto123")) {
-            System.out.println(aluno.getNome() + " logado com sucesso!");
-        } else {
-            System.out.println(aluno.getNome() + " não logado!");
-        }
-
-        // Autenticação do professor
-        if (professor.autenticar("EdmarSenne", "S1234678")) {
-            System.out.println(professor.getNome() + " logado com sucesso!");
-        } else {
-            System.out.println(professor.getNome() + " não logado!");
-        }
-
-        // Autenticação do administrador
-        if (administrador.autenticar("admin", "senhaErrada")) {
-            System.out.println(administrador.getNome() + "logado com sucesso!");
-        } else {
-            System.out.println(administrador.getNome() + " não logado!");
-        }
-
-
-        Scanner leitura = new Scanner(System.in);
-        int opcao;
-
-        do {
-            System.out.println("\n========= MENU DE RELATÓRIOS =========");
-            System.out.println("1 - Relatório geral de alunos");
-            System.out.println("2 - Relatório geral de professores");
-            System.out.println("3 - Relatório geral de cursos");
-            System.out.println("0 - Sair");
-
-            System.out.print("Escolha uma opção: ");
-            try {
-                opcao = Integer.parseInt(leitura.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Digite uma opção válida.");
-                opcao = -1;
-                continue;
-            }
-
-            switch (opcao) {
-
-                // Relatório geral de alunos
-                case 1:
-                    System.out.println("\n========= RELATÓRIO GERAL DE ALUNOS =========");
-
-                    for (Aluno a : alunoService.listarTodosAlunos()) {
-                        a.gerarRelatorio();
-                    }
-                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
-                    break;
-
-                // Relatório geral de professores
-                case 2:
-                    System.out.println("\n======== RELATÓRIO GERAL DE PROFESSORES ========");
-
-                    for (Professor p : professorService.listarTodosProfessores() ) {
-                        p.gerarRelatorio();
-                    }
-                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
-                    break;
-
-                // Relatório geral de cursos
-                case 3:
-                    System.out.println("\n========== RELATÓRIO GERAL DE CURSOS ==========");
-
-                    for (Curso c : cursoService.listarTodosCursos()) {
-                        c.gerarRelatorio();
-                    }
-                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
-                    break;
-
-                case 0:
-                    System.out.println("Saindo do menu de relatórios...");
-                    break;
-
-                default:
-                    System.out.println("Opção inválida!");
-            }
-
-        } while (opcao != 0);
+        //Exibe o menu de relatorios
+        menuRelatorios.exibirMenu();
 
     }
+
 }

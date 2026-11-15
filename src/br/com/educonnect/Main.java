@@ -13,8 +13,9 @@ public class Main {
         ProfessorService professorService = new ProfessorService(professorRepository);
         CursoRepository cursoRepository = new CursoRepository();
         CursoService cursoService = new CursoService(cursoRepository);
-        MenuRelatorios menuRelatorios = new MenuRelatorios(alunoService,professorService,
-                cursoService);
+        TurmaRepository turmaRepository = new TurmaRepository();
+        TurmaService turmaService = new TurmaService(turmaRepository);
+        Menu menu = new Menu(alunoService,professorService,cursoService);
 
 
 
@@ -78,6 +79,8 @@ public class Main {
                 professor,
                 cursoEAD);
 
+        turmaService.cadastrarTurma(turma);
+
         // Instancia novos alunos
         Aluno aluno2 = new Aluno(
                 "Christopher Brandon",
@@ -138,7 +141,7 @@ public class Main {
         cursoEAD.detalharCurso();
 
         //Exibe o menu de relatorios
-        menuRelatorios.exibirMenu();
+        menu.exibirMenu();
 
     }
 

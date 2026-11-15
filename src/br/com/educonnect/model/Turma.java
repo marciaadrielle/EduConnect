@@ -41,6 +41,13 @@ public class Turma {
         }
         listaAlunos.add(aluno);
     }
+
+    //Getter
+
+    public String getCodigo() {
+        return codigo;
+    }
+
     //Método para remover um aluno da lista
     public void removerAluno(String matricula){
         if(matricula == null || matricula.isBlank()){

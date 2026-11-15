@@ -1,4 +1,86 @@
 package br.com.educonnect.ui;
 
+import br.com.educonnect.model.Aluno;
+import br.com.educonnect.model.Curso;
+import br.com.educonnect.model.Professor;
+import br.com.educonnect.service.AlunoService;
+import br.com.educonnect.service.CursoService;
+import br.com.educonnect.service.ProfessorService;
+
+import java.util.Scanner;
+
 public class Menu {
+    private final AlunoService alunoService;
+    private final ProfessorService professorService;
+    private final CursoService cursoService;
+
+    public Menu(AlunoService alunoService, ProfessorService professorService, CursoService cursoService) {
+        this.alunoService = alunoService;
+        this.professorService = professorService;
+        this.cursoService = cursoService;
+    }
+
+    public void exibirMenu(){
+        Scanner leitura = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("\n========= MENU DE RELATÓRIOS =========");
+            System.out.println("1 - Relatório geral de alunos");
+            System.out.println("2 - Relatório geral de professores");
+            System.out.println("3 - Relatório geral de cursos");
+            System.out.println("0 - Sair");
+
+            System.out.print("Escolha uma opção: ");
+            try {
+                opcao = Integer.parseInt(leitura.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Digite uma opção válida.");
+                opcao = -1;
+                continue;
+            }
+
+            switch (opcao) {
+
+                // Relatório geral de alunos
+                case 1:
+                    System.out.println("\n========= RELATÓRIO GERAL DE ALUNOS =========");
+
+                    for (Aluno a : alunoService.listarTodosAlunos()) {
+                        a.gerarRelatorio();
+                    }
+                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
+                    break;
+
+                // Relatório geral de professores
+                case 2:
+                    System.out.println("\n======== RELATÓRIO GERAL DE PROFESSORES ========");
+
+                    for (Professor p : professorService.listarTodosProfessores() ) {
+                        p.gerarRelatorio();
+                    }
+                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
+                    break;
+
+                // Relatório geral de cursos
+                case 3:
+                    System.out.println("\n========== RELATÓRIO GERAL DE CURSOS ==========");
+
+                    for (Curso c : cursoService.listarTodosCursos()) {
+                        c.gerarRelatorio();
+                    }
+                    System.out.println("\n==============  FIM DO RELATÓRIO ==============");
+                    break;
+
+                case 0:
+                    System.out.println("Saindo do menu de relatórios...");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+            }
+
+        } while (opcao != 0);
+
+    }
 }

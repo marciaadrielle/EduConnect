@@ -7,14 +7,14 @@ public abstract class Usuario implements Autenticacao {
 
     public Usuario(String nome, String login, String senha) {
         //Validações
-        if(nome == null || nome.isBlank()){
+        if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome do usuário não pode estar vazio.");
         }
-        if (login == null || login.isBlank() || login.length() < 4){
+        if (login == null || login.isBlank() || login.length() < 4) {
             throw new IllegalArgumentException("O login deve ter no mínimo 4 caracteres.");
         }
 
-        if (senha == null || senha.isBlank() || senha.length() < 8){
+        if (senha == null || senha.isBlank() || senha.length() < 8) {
             throw new IllegalArgumentException("A senha deve ter no mínimo 8 caracteres.");
         }
 
@@ -36,5 +36,7 @@ public abstract class Usuario implements Autenticacao {
     @Override
     public boolean autenticar(String login, String senha) {
         return this.login.equals(login) && this.senha.equals(senha);
+
+
     }
 }

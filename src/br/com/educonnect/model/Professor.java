@@ -1,6 +1,6 @@
 package br.com.educonnect.model;
 
-public class Professor extends Usuario {
+public class Professor extends Usuario implements Relatorio {
     private String especialidade;
     private String registro;
 
@@ -18,6 +18,7 @@ public class Professor extends Usuario {
         this.registro = registro;
     }
 
+
     public String getEspecialidade() {
         return especialidade;
     }
@@ -25,5 +26,19 @@ public class Professor extends Usuario {
     public String getRegistro() {
         return registro;
     }
+
+
+
+    //Implementa o método para gerar relatório
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Nome: " + getNome());
+        System.out.println("Especialidade: " + getEspecialidade());
+        System.out.println("Registro: " + getRegistro());
+        System.out.println("-----------------------------------------------");
+
+    }
+
+
 
 }

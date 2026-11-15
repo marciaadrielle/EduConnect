@@ -3,7 +3,7 @@ package br.com.educonnect.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Aluno extends Usuario {
+public class Aluno extends Usuario implements Relatorio {
     private String matricula;
     private Curso curso;
     private List<Avaliacao> avaliacoes;
@@ -17,6 +17,7 @@ public class Aluno extends Usuario {
         if (curso == null) {
             throw new IllegalArgumentException("O aluno precisa estar associado a um curso.");
         }
+
         this.matricula = matricula;
         this.curso = curso;
         this.avaliacoes = new ArrayList<>();
@@ -36,6 +37,7 @@ public class Aluno extends Usuario {
         avaliacoes.add(avaliacao);
     }
 
+
     //Getters
     public String getMatricula() {
         return matricula;
@@ -48,4 +50,30 @@ public class Aluno extends Usuario {
     public List<Avaliacao> getAvaliacoes() {
         return List.copyOf(avaliacoes);
     }
+
+    //Implementa o metódo gerar relatório
+    @Override
+    public void gerarRelatorio() {
+        System.out.println("Nome: " + getNome());
+        System.out.println("Matrícula: " + getMatricula());
+        System.out.println("Curso: " + getCurso().getNome());
+
+        if (avaliacoes.isEmpty()) {
+            System.out.println("Nenhuma avaliação cadastrada para este aluno.");
+        } else {
+            for (Avaliacao avaliacao : avaliacoes) {
+                System.out.println("Avaliação: " + avaliacao.getDescricao());
+
+                if (avaliacao.getNota() == null) {
+                    System.out.println("Nota: Não atribuída");
+                } else {
+                    System.out.println("Nota: " + avaliacao.getNota());
+                }
+            }
+        }
+        System.out.println("-----------------------------------------------");
+
+    }
+
+
 }

@@ -1,16 +1,17 @@
-
-
 package br.com.educonnect;
 
 import br.com.educonnect.model.*;
+import br.com.educonnect.repository.AlunoRepository;
+import br.com.educonnect.service.AlunoService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
+        AlunoRepository alunoRepository = new AlunoRepository();
+        AlunoService alunoService = new AlunoService(alunoRepository);
         //Instancia um administrador
         Administrador administrador = new Administrador(
                 "Administrador",
@@ -103,12 +104,12 @@ public class Main {
                 "000000-04",
                 cursoEAD);
 
-        //Cria a lista de alunos
-        List<Aluno> alunos = new ArrayList<>();
-        alunos.add(aluno);
-        alunos.add(aluno2);
-        alunos.add(aluno3);
-        alunos.add(aluno4);
+        alunoService.cadastrarAluno(aluno);
+        alunoService.cadastrarAluno(aluno2);
+        alunoService.cadastrarAluno(aluno3);
+        alunoService.cadastrarAluno(aluno4);
+
+
 
         // Adiciona os alunos à turma
         turma.adicionarAluno(aluno);
@@ -193,7 +194,7 @@ public class Main {
                 case 1:
                     System.out.println("\n========= RELATÓRIO GERAL DE ALUNOS =========");
 
-                    for (Aluno a : alunos) {
+                    for (Aluno a : alunoService.listarTodosAlunos()) {
                         a.gerarRelatorio();
                     }
                     System.out.println("\n==============  FIM DO RELATÓRIO ==============");

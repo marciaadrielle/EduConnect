@@ -1,17 +1,20 @@
 package br.com.educonnect;
 
 import br.com.educonnect.model.*;
-import br.com.educonnect.repository.AlunoRepository;
-import br.com.educonnect.service.AlunoService;
+import br.com.educonnect.repository.*;
+import br.com.educonnect.service.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         AlunoRepository alunoRepository = new AlunoRepository();
         AlunoService alunoService = new AlunoService(alunoRepository);
+        ProfessorRepository professorRepository = new ProfessorRepository();
+        ProfessorService professorService = new ProfessorService(professorRepository);
+        CursoRepository cursoRepository = new CursoRepository();
+        CursoService cursoService = new CursoService(cursoRepository);
+
         //Instancia um administrador
         Administrador administrador = new Administrador(
                 "Administrador",
@@ -34,10 +37,10 @@ public class Main {
                 "Studeo"
         );
 
-        //Cria lista de cursos
-        List<Curso> cursos = new ArrayList<>();
-        cursos.add(cursoPresencial);
-        cursos.add(cursoEAD);
+
+        cursoService.cadastrarCurso(cursoEAD);
+        cursoService.cadastrarCurso(cursoPresencial);
+
 
         // Instancia um aluno
         Aluno aluno = new Aluno(
@@ -47,12 +50,6 @@ public class Main {
                 "000000-01",
                 cursoEAD);
 
-        System.out.println("\n================ ALUNO ===============");
-        System.out.println("Nome: " + aluno.getNome());
-        System.out.println("Matrícula: " + aluno.getMatricula());
-        System.out.println("Curso: " + aluno.getCurso().getNome());
-        System.out.println("======================================");
-
         // Instancia um professor
         Professor professor = new Professor(
                 "Edmar Senne",
@@ -61,7 +58,7 @@ public class Main {
                 "Java",
                 "111113-66"
         );
-        Professor professor1 = new Professor(
+        Professor professor2 = new Professor(
                 "Maria Lovelace",
                 "lovelace",
                 "love1234",
@@ -69,16 +66,8 @@ public class Main {
                 "111615-00"
         );
 
-        //Cria a lista de professores
-        List<Professor> professores = new ArrayList<>();
-        professores.add(professor);
-        professores.add(professor1);
-
-        System.out.println("\n============== PROFESSOR =============");
-        System.out.println("Nome: " + professor.getNome());
-        System.out.println("Especialidade: " + professor.getEspecialidade());
-        System.out.println("Registro: " + professor.getRegistro());
-        System.out.println("=======================================");
+        professorService.cadastrarProfessor(professor);
+        professorService.cadastrarProfessor(professor2);
 
         // Instancia uma turma
         Turma turma = new Turma(
@@ -204,7 +193,7 @@ public class Main {
                 case 2:
                     System.out.println("\n======== RELATÓRIO GERAL DE PROFESSORES ========");
 
-                    for (Professor p : professores) {
+                    for (Professor p : professorService.listarTodosProfessores() ) {
                         p.gerarRelatorio();
                     }
                     System.out.println("\n==============  FIM DO RELATÓRIO ==============");
@@ -214,7 +203,7 @@ public class Main {
                 case 3:
                     System.out.println("\n========== RELATÓRIO GERAL DE CURSOS ==========");
 
-                    for (Curso c : cursos) {
+                    for (Curso c : cursoService.listarTodosCursos()) {
                         c.gerarRelatorio();
                     }
                     System.out.println("\n==============  FIM DO RELATÓRIO ==============");

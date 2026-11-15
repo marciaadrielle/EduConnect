@@ -10,7 +10,7 @@ public class AlunoService {
 
     private AlunoRepository alunoRepository;
 
-    // Construtor: recebe o repositório de alunos
+    // Construtor
     public AlunoService(AlunoRepository alunoRepository) {
         this.alunoRepository = alunoRepository;
     }
@@ -18,10 +18,9 @@ public class AlunoService {
     // Método para cadastrar um novo aluno
     public void cadastrarAluno(Aluno aluno) {
 
-        // Verifica se o aluno é nulo
-        if (aluno == null) {
+        if (aluno == null ) {
             throw new IllegalArgumentException(
-                    "O aluno não pode ser nulo."
+                    "O aluno não pode estar vazio."
             );
         }
         Aluno a  = alunoRepository.buscarPorMatricula(aluno.getMatricula());

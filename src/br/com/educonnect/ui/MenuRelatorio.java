@@ -9,12 +9,12 @@ import br.com.educonnect.service.ProfessorService;
 
 import java.util.Scanner;
 
-public class Menu {
+public class MenuRelatorio {
     private final AlunoService alunoService;
     private final ProfessorService professorService;
     private final CursoService cursoService;
 
-    public Menu(AlunoService alunoService, ProfessorService professorService, CursoService cursoService) {
+    public MenuRelatorio(AlunoService alunoService, ProfessorService professorService, CursoService cursoService) {
         this.alunoService = alunoService;
         this.professorService = professorService;
         this.cursoService = cursoService;

@@ -15,7 +15,7 @@ public class Main {
         CursoService cursoService = new CursoService(cursoRepository);
         TurmaRepository turmaRepository = new TurmaRepository();
         TurmaService turmaService = new TurmaService(turmaRepository);
-        Menu menu = new Menu(alunoService,professorService,cursoService);
+        MenuPrincipal menu = new MenuPrincipal(alunoService,professorService,cursoService,turmaService);
 
 
 
@@ -141,6 +141,7 @@ public class Main {
         cursoEAD.detalharCurso();
 
         //Exibe o menu de relatorios
+
         menu.exibirMenu();
 
     }

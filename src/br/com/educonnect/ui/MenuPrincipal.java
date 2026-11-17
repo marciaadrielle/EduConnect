@@ -1,5 +1,6 @@
 package br.com.educonnect.ui;
 
+import br.com.educonnect.model.*;
 import br.com.educonnect.service.*;
 
 import java.util.Scanner;
@@ -43,7 +44,43 @@ public class MenuPrincipal {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Cadastro de cursos em desenvolvimento.");
+                    System.out.println("\n========= CADASTRAR CURSO =========");
+                    System.out.println("Digite o nome do curso: ");
+                    String nome = leitura.nextLine();
+
+                    System.out.println("Digite o código do curso: ");
+                    String codigo = leitura.nextLine();
+
+                    System.out.println("Digite a carga horária do curso: ");
+                    int cargaHoraria = Integer.parseInt(leitura.nextLine());
+
+                    System.out.println("Escolha a modalidade: ");
+                    System.out.println("1 - Presencial ");
+                    System.out.println("2 - EAD");
+                    int modalidade = Integer.parseInt(leitura.nextLine());
+
+                    Curso curso;
+                    if (modalidade == 1) {
+                        System.out.println("Digite a sala de aula do curso: ");
+                        String sala = leitura.nextLine();
+
+                        curso = new CursoPresencial(nome, codigo, cargaHoraria, sala);
+                    } else if (modalidade == 2) {
+                        System.out.println("Digite a plataforma virtual: ");
+                        String plataformaVirtual = leitura.nextLine();
+
+                        curso = new CursoEAD(nome, codigo, cargaHoraria, plataformaVirtual);
+                    }else {
+                        System.out.println("modalidade inválida! Digite novamente");
+                        break;
+
+
+                    }
+
+                    cursoService.cadastrarCurso(curso);
+                    System.out.println("Curso cadastrado com sucesso!");
+
+
                     break;
 
                 case 2:

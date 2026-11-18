@@ -44,55 +44,121 @@ public class MenuPrincipal {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("\n========= CADASTRAR CURSO =========");
-                    System.out.println("Digite o nome do curso: ");
-                    String nome = leitura.nextLine();
+                    try {
+                        System.out.println("\n========= CADASTRAR CURSO =========");
+                        System.out.println("Digite o nome do curso: ");
+                        String nomeCurso = leitura.nextLine();
 
-                    System.out.println("Digite o código do curso: ");
-                    String codigo = leitura.nextLine();
+                        System.out.println("Digite o código do curso: ");
+                        String codigoCurso = leitura.nextLine();
 
-                    System.out.println("Digite a carga horária do curso: ");
-                    int cargaHoraria = Integer.parseInt(leitura.nextLine());
+                        System.out.println("Digite a carga horária do curso: ");
+                        int cargaHoraria = Integer.parseInt(leitura.nextLine());
 
-                    System.out.println("Escolha a modalidade: ");
-                    System.out.println("1 - Presencial ");
-                    System.out.println("2 - EAD");
-                    int modalidade = Integer.parseInt(leitura.nextLine());
+                        System.out.println("Escolha a modalidade: ");
+                        System.out.println("1 - Presencial ");
+                        System.out.println("2 - EAD");
+                        int modalidade = Integer.parseInt(leitura.nextLine());
 
-                    Curso curso;
-                    if (modalidade == 1) {
-                        System.out.println("Digite a sala de aula do curso: ");
-                        String sala = leitura.nextLine();
+                        Curso curso;
+                        if (modalidade == 1) {
+                            System.out.println("Digite a sala de aula do curso: ");
+                            String sala = leitura.nextLine();
 
-                        curso = new CursoPresencial(nome, codigo, cargaHoraria, sala);
-                    } else if (modalidade == 2) {
-                        System.out.println("Digite a plataforma virtual: ");
-                        String plataformaVirtual = leitura.nextLine();
+                            curso = new CursoPresencial(nomeCurso, codigoCurso, cargaHoraria, sala);
+                        } else if (modalidade == 2) {
+                            System.out.println("Digite a plataforma virtual: ");
+                            String plataformaVirtual = leitura.nextLine();
 
-                        curso = new CursoEAD(nome, codigo, cargaHoraria, plataformaVirtual);
-                    }else {
-                        System.out.println("modalidade inválida! Digite novamente");
-                        break;
-
-
+                            curso = new CursoEAD(nomeCurso, codigoCurso, cargaHoraria, plataformaVirtual);
+                        } else {
+                            System.out.println("modalidade inválida! Digite novamente");
+                            break;
+                        }
+                        cursoService.cadastrarCurso(curso);
+                        System.out.println("Curso cadastrado com sucesso!");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro: informe um número válido.");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Erro: " + e.getMessage());
                     }
-
-                    cursoService.cadastrarCurso(curso);
-                    System.out.println("Curso cadastrado com sucesso!");
-
 
                     break;
 
                 case 2:
-                    System.out.println("Cadastro de professores em desenvolvimento.");
+                    try {
+                        System.out.println("\n========= CADASTRAR PROFESSOR =========");
+                        System.out.println("Digite o nome do professor: ");
+                        String nomeProfessor = leitura.nextLine();
+
+                        System.out.println("Digite o login do professor: ");
+                        String loginProfessor = leitura.nextLine();
+
+                        System.out.println("Digite uma senha com no mínimo 8 caracteres: ");
+                        String senhaProfessor = leitura.nextLine();
+
+                        System.out.println("Digite a especialidade do professor: ");
+                        String especialidade = leitura.nextLine();
+
+                        System.out.println("Digite o registro do professor: ");
+                        String registro = leitura.nextLine();
+
+                        Professor professor;
+                        professor = new Professor(nomeProfessor, loginProfessor, senhaProfessor, especialidade, registro);
+
+                        professorService.cadastrarProfessor(professor);
+                        System.out.println("Professor cadastrado com sucesso!");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
 
                 case 3:
-                    System.out.println("Cadastro de alunos em desenvolvimento.");
+                    try {
+                        if (cursoService.listarTodosCursos().isEmpty()) {
+                            System.out.println("Não existem cursos cadastrados.");
+                            System.out.println("Cadastre um curso antes de cadastrar alunos.");
+                            break;
+                        }
+                        System.out.println("\n========= CADASTRAR ALUNO =========");
+                        System.out.println("Digite o nome do aluno: ");
+                        String nomeAluno = leitura.nextLine();
+
+                        System.out.println("Digite o login do aluno: ");
+                        String loginAluno = leitura.nextLine();
+
+                        System.out.println("Digite uma senha com no mínimo 8 caracteres: ");
+                        String senhaAluno = leitura.nextLine();
+
+                        System.out.println("Digite a matricula: ");
+                        String matricula = leitura.nextLine();
+
+                        System.out.println("Digite o curso do aluno: ");
+                        String codigoCursoAluno = leitura.nextLine();
+
+                        Curso cursoAluno = cursoService.buscarPorCodigo(codigoCursoAluno);
+
+                        if (cursoAluno == null) {
+                            System.out.println("Curso não encontrado. Cadastro não realizado.");
+                            break;
+                        }
+                        Aluno aluno;
+                        aluno = new Aluno(nomeAluno, loginAluno, senhaAluno, matricula, cursoAluno);
+                        alunoService.cadastrarAluno(aluno);
+                        System.out.println("Aluno cadastrado com sucesso!");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
 
                 case 4:
-                    System.out.println("Gerenciamento de turmas em desenvolvimento.");
+                    try {
+
+
+                        System.out.println("Gerenciamento de turmas em desenvolvimento.");
+                    }catch (IllegalArgumentException e){
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
 
                 case 5:

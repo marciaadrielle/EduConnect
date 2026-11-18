@@ -153,9 +153,43 @@ public class MenuPrincipal {
 
                 case 4:
                     try {
+                        if (cursoService.listarTodosCursos().isEmpty()){
+                            System.out.println("Não existem cursos cadastrados");
+                            System.out.println("Cadastre um curso antes de criar uma turma");
+                            break;
+                        }
 
+                        if (professorService.listarTodosProfessores().isEmpty()){
+                            System.out.println("Não existem professores cadastrados.");
+                            System.out.println("Cadastre um professor antes de criar uma turma.");
+                        break;
+                        }
 
-                        System.out.println("Gerenciamento de turmas em desenvolvimento.");
+                        System.out.println("\n========= CADASTRAR TURMA =========");
+                        System.out.println("Digite o código da turma: ");
+                        String codigoTurma = leitura.nextLine();
+
+                        System.out.println("Digite o registro do professor: ");
+                        String registroProfessor = leitura.nextLine();
+                        Professor professorTurma = professorService.buscarPorRegistro(registroProfessor);
+
+                        if (professorTurma == null){
+                            System.out.println("Professor não encontrado. Cadastro não realizado");
+                            break;
+                        }
+                        System.out.println("Digite o código do curso: ");
+                        String codigoCursoTurma = leitura.nextLine();
+                        Curso cursoTurma = cursoService.buscarPorCodigo(codigoCursoTurma);
+
+                        if (cursoTurma == null){
+                            System.out.println("Cuso não encontrado. Cadastro não realizado");
+                        break;
+                        }
+
+                        Turma turma;
+                        turma = new Turma(codigoTurma, professorTurma,cursoTurma);
+                        turmaService.cadastrarTurma(turma);
+                        System.out.println("Turma cadastrada com sucesso!");
                     }catch (IllegalArgumentException e){
                         System.out.println("Erro: " + e.getMessage());
                     }

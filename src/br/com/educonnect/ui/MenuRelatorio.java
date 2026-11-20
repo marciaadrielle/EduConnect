@@ -46,6 +46,11 @@ public class MenuRelatorio {
                 case 1:
                     System.out.println("\n========= RELATÓRIO GERAL DE ALUNOS =========");
 
+                    if (alunoService.listarTodosAlunos().isEmpty()) {
+                        System.out.println("Não existem alunos cadastrados.");
+                        break;
+                    }
+
                     for (Aluno a : alunoService.listarTodosAlunos()) {
                         a.gerarRelatorio();
                     }
@@ -56,6 +61,10 @@ public class MenuRelatorio {
                 case 2:
                     System.out.println("\n======== RELATÓRIO GERAL DE PROFESSORES ========");
 
+                    if (professorService.listarTodosProfessores().isEmpty()){
+                        System.out.println("Não existem professores cadastrados.");
+                        break;
+                    }
                     for (Professor p : professorService.listarTodosProfessores() ) {
                         p.gerarRelatorio();
                     }
@@ -66,6 +75,10 @@ public class MenuRelatorio {
                 case 3:
                     System.out.println("\n========== RELATÓRIO GERAL DE CURSOS ==========");
 
+                    if (cursoService.listarTodosCursos().isEmpty()){
+                        System.out.println("Não existem cursos cadastrado");
+                        break;
+                    }
                     for (Curso c : cursoService.listarTodosCursos()) {
                         c.gerarRelatorio();
                     }
@@ -73,7 +86,7 @@ public class MenuRelatorio {
                     break;
 
                 case 0:
-                    System.out.println("Saindo do menu de relatórios...");
+                    System.out.println("Voltando para o menu principal.");
                     break;
 
                 default:

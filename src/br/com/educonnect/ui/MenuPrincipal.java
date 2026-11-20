@@ -2,7 +2,6 @@ package br.com.educonnect.ui;
 
 import br.com.educonnect.model.*;
 import br.com.educonnect.service.*;
-import br.com.educonnect.ui.*;
 
 import java.util.Scanner;
 
@@ -11,15 +10,15 @@ public class MenuPrincipal {
     private final AlunoService alunoService;
     private final ProfessorService professorService;
     private final CursoService cursoService;
-    private final TurmaService turmaService;
     private final MenuTurmas menuTurmas;
+    private final MenuRelatorio menuRelatorio;
 
-    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService, TurmaService turmaService, MenuTurmas menuTurmas) {
+    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService,MenuTurmas menuTurmas, MenuRelatorio menuRelatorio) {
         this.alunoService = alunoService;
         this.professorService = professorService;
         this.cursoService = cursoService;
-        this.turmaService = turmaService;
         this.menuTurmas = menuTurmas;
+        this.menuRelatorio = menuRelatorio;
     }
 
     public void exibirMenu() {
@@ -163,7 +162,7 @@ public class MenuPrincipal {
                     break;
 
                 case 6:
-                    System.out.println("Relatórios em desenvolvimento.");
+                    menuRelatorio.exibirMenu();
                     break;
 
                 case 0:

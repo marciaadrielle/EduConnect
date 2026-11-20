@@ -16,12 +16,12 @@ public class Main {
         TurmaRepository turmaRepository = new TurmaRepository();
         TurmaService turmaService = new TurmaService(turmaRepository);
         MenuTurmas menuTurmas = new MenuTurmas(turmaService,cursoService, professorService,alunoService);
-        MenuPrincipal menu = new MenuPrincipal(alunoService,professorService,cursoService,turmaService,menuTurmas);
+        MenuRelatorio menuRelatorio = new MenuRelatorio(alunoService,professorService,cursoService);
+        MenuPrincipal menu = new MenuPrincipal(alunoService,professorService,cursoService,menuTurmas,menuRelatorio);
 
 
 
-        //Exibe o menu de relatorios
-
+        //Exibe o menu principal
         menu.exibirMenu();
 
     }

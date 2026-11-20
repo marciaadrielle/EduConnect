@@ -100,11 +100,6 @@ public class MenuTurmas {
                             System.out.println("Cadastre uma turma para adicionar alunos");
                             break;
                         }
-                        if (alunoService.listarTodosAlunos().isEmpty()) {
-                            System.out.println("Não existem alunos cadastrados");
-                            System.out.println("Cadastre um aluno antes de adicioná-lo a turma.");
-                            break;
-                        }
                         System.out.println("=================== ADICIONAR ALUNO À TURMA ==================");
                         System.out.println("Digite o código da turma: ");
                         String codigoTurma = leitura.nextLine();
@@ -132,10 +127,43 @@ public class MenuTurmas {
                     }
                     break;
                 case 3:
-                    System.out.println("Remover aluno da turma");
+                    try {
+                        if (turmaService.listarTodasTurmas().isEmpty()) {
+                            System.out.println("Não existem turmas cadastradas para realizar a remoção.");
+                            break;
+                        }
+                        System.out.println("=================== REMOVER ALUNO DA TURMA ==================");
+                        System.out.println("Digite o código da turma: ");
+                        String codigoTurma = leitura.nextLine();
+
+                        Turma turma = turmaService.buscarTurmaPorCodigo(codigoTurma);
+
+                        if (turma == null) {
+                            System.out.println("Turma não encontrada. Operação não realizada.");
+                            break;
+                        }
+
+                        System.out.println("Digite a matricula do aluno: ");
+                        String matricula = leitura.nextLine();
+
+                        turma.removerAluno(matricula);
+                        System.out.println("Aluno removido com sucesso");
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
                 case 4:
-                    System.out.println("Listar turmas");
+                    System.out.println("\n========= LISTA DE TURMAS =========");
+
+                    if (turmaService.listarTodasTurmas().isEmpty()) {
+                        System.out.println("Não existem turmas cadastradas.");
+                        break;
+                    }
+
+                    for (Turma turma : turmaService.listarTodasTurmas()) {
+                        turma.exibirResumo();
+                    }
+
                     break;
                 case 0:
                     System.out.println("Voltando para o menu principal.");

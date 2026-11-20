@@ -12,12 +12,14 @@ public class MenuPrincipal {
     private final ProfessorService professorService;
     private final CursoService cursoService;
     private final TurmaService turmaService;
+    private final MenuTurmas menuTurmas;
 
-    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService, TurmaService turmaService) {
+    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService, TurmaService turmaService, MenuTurmas menuTurmas) {
         this.alunoService = alunoService;
         this.professorService = professorService;
         this.cursoService = cursoService;
         this.turmaService = turmaService;
+        this.menuTurmas = menuTurmas;
     }
 
     public void exibirMenu() {
@@ -153,6 +155,8 @@ public class MenuPrincipal {
                     break;
 
                 case 4:
+                    menuTurmas.exibirMenu();
+                    break;
 
                 case 5:
                     System.out.println("Registro de avaliações em desenvolvimento.");

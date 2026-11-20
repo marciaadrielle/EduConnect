@@ -29,7 +29,7 @@ public class MenuRelatorio {
             System.out.println("1 - Relatório geral de alunos");
             System.out.println("2 - Relatório geral de professores");
             System.out.println("3 - Relatório geral de cursos");
-            System.out.println("0 - Sair");
+            System.out.println("0 - Voltar ao menu principal");
 
             System.out.print("Escolha uma opção: ");
             try {

@@ -13,7 +13,7 @@ public class MenuPrincipal {
     private final MenuTurmas menuTurmas;
     private final MenuRelatorio menuRelatorio;
 
-    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService,MenuTurmas menuTurmas, MenuRelatorio menuRelatorio) {
+    public MenuPrincipal(AlunoService alunoService, ProfessorService professorService, CursoService cursoService, MenuTurmas menuTurmas, MenuRelatorio menuRelatorio) {
         this.alunoService = alunoService;
         this.professorService = professorService;
         this.cursoService = cursoService;
@@ -158,7 +158,50 @@ public class MenuPrincipal {
                     break;
 
                 case 5:
-                    System.out.println("Registro de avaliações em desenvolvimento.");
+                    try {
+                        if (alunoService.listarTodosAlunos().isEmpty()) {
+                            System.out.println("Não existem alunos cadastrados.");
+                            break;
+                        }
+
+                        System.out.println("\n=============== REGISTRAR AVALIAÇÃO ===============");
+
+                        // Solicita a matrícula do aluno
+                        System.out.println("Digite a matrícula do aluno: ");
+                        String matricula = leitura.nextLine();
+
+                        // Busca o aluno cadastrado
+                        Aluno aluno = alunoService.buscarAlunoPorMatricula(matricula);
+
+                        if (aluno == null) {
+                            System.out.println("Aluno não encontrado. Avaliação não registrada.");
+                            break;
+                        }
+
+                        // Solicita os dados da avaliação
+                        System.out.println("Digite a descrição da avaliação: ");
+                        String descricao = leitura.nextLine();
+
+                        System.out.println("Digite a nota da avaliação (0 a 10): ");
+                        double nota = Double.parseDouble(leitura.nextLine());
+
+                        // Cria a avaliação associada ao aluno
+                        Avaliacao avaliacao = new Avaliacao(descricao, aluno);
+
+                        // Valida e atribui a nota
+                        avaliacao.atribuirNota(nota);
+
+                        // Adiciona a avaliação à lista do aluno
+                        aluno.adicionarAvaliacao(avaliacao);
+
+                        System.out.println("Avaliação registrada com sucesso!");
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Erro: Informe uma nota numérica válida.");
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Erro: " + e.getMessage());
+                    }
                     break;
 
                 case 6:
